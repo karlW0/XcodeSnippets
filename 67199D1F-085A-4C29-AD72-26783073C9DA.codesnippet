@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klappdelegate</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>@UIApplicationMain
+final class AppDelegate: UIResponder {
+    
+    var window: UIWindow?
+}
+
+// MARK: - UIApplicationDelegate
+extension AppDelegate: UIApplicationDelegate {
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -&gt; Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = &lt;#vc#&gt;
+        window?.makeKeyAndVisible()
+        return true
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>67199D1F-085A-4C29-AD72-26783073C9DA</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Template for AppDelegate.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>AppDelegate Template</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

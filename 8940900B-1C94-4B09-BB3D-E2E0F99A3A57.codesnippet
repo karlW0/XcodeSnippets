@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klvc</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>final class &lt;#vc name#&gt;: UIViewController {
+  
+  /// Factory method for creating this view controller.
+  ///
+  /// - Returns: Returns an instance of this view controller.
+  class func instantiate() -&gt; &lt;#vc name#&gt; {
+    let storyboard = UIStoryboard(name: String(describing: &lt;#vc name#&gt;.self), bundle: nil)
+    let vc = storyboard.instantiateInitialViewController() as! &lt;#vc name#&gt;
+    return vc
+  }
+}
+
+// MARK: - Life Cycle
+extension &lt;#vc name#&gt; {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8940900B-1C94-4B09-BB3D-E2E0F99A3A57</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Template for a generic view controller.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>View Controller Template</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
