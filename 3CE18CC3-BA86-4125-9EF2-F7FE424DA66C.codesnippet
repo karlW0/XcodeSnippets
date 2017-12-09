@@ -12,17 +12,22 @@
 	<string>import UIKit
 
 extension UIViewController {
-  
-  func alert(title: String, message: String) {
-    let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-    present(alertVC, animated: true, completion: nil)
-  }
+    
+    /// Presents a `UIAlertController` popup with `.alert` style, with a default "Ok" button that dismisses the popup.
+    ///
+    /// - Parameters:
+    ///   - title: Title for the alert.
+    ///   - message: Message for the alert.
+    func alert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>3CE18CC3-BA86-4125-9EF2-F7FE424DA66C</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string>Extension on UIViewController for convenience.</string>
 	<key>IDECodeSnippetTitle</key>
@@ -30,6 +35,6 @@ extension UIViewController {
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>0</integer>
+	<integer>2</integer>
 </dict>
 </plist>
