@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klbox</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>final class Box&lt;T&gt; {
+  
+  typealias Listener = (T) -&gt; Void
+  var listener: Listener?
+  
+  var value: T {
+    didSet {
+      listener?(value)
+    }
+  }
+  
+  init(_ value: T) {
+    self.value = value
+  }
+  
+  func bind(listener: Listener?) {
+    self.listener = listener
+    listener?(value)
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>786BB196-2D6E-4F8C-8226-97CCAEF469AD</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>For MVVM</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Box</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
