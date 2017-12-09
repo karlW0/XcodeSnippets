@@ -9,7 +9,9 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>final class &lt;#vc name#&gt;: UIViewController {
+	<string>import UIKit
+
+final class &lt;#vc name#&gt;: UIViewController {
   
   /// Factory method for creating this view controller.
   ///
@@ -39,6 +41,6 @@ extension &lt;#vc name#&gt; {
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>0</integer>
+	<integer>2</integer>
 </dict>
 </plist>
