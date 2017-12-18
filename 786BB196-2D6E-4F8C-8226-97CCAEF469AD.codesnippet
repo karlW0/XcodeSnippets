@@ -6,7 +6,7 @@
 	<string>klbox</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassImplementation</string>
+		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>final class Box&lt;T&gt; {

@@ -6,7 +6,7 @@
 	<string>klcountedset</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassImplementation</string>
+		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>/// Also known as `Multiset` and `Bag`, the `CountedSet` is a `Set` that also
