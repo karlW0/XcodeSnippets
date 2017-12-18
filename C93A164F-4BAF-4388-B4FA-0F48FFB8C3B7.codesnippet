@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klcountedset</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// Also known as `Multiset` and `Bag`, the `CountedSet` is a `Set` that also
+/// keeps track of the number of times a certain value has been inserted.
+///
+///     var set: CountedSet = []
+///     set.insert("abacus")
+///     set.insert("abacus")
+///
+///     print(set.count(for: "abacus"))
+///     // Prints 2
+///
+/// Built whilst using the Swift repo as a reference (line 458) - Dec 17, 2017:
+/// https://github.com/apple/swift/blob/9fef06e59ca1268a1877cc2a83389d4980a5d9f3/stdlib/public/core/HashedCollections.swift.gyb
+public struct CountedSet&lt;Element: Hashable&gt; {
+  
+  /// A `Dictionary` containing the elements in the `CountedSet`.
+  /// The key is the inserted value, and the value of the key represents the
+  /// number of times the inserted value has been inserted.
+  private var storage: [Element: UInt]
+  
+  /// Returns the number of times a value has been inserted into the
+  /// `CountedSet`.
+  ///
+  /// - Parameter key: A value in the `CountedSet`.
+  /// - Returns: A `UInt` representing the number of times the value has been
+  /// inserted.
+  public func count(for key: Element) -&gt; UInt {
+    return storage[key] ?? 0
+  }
+  
+  /// Inserts an `Hashable` value into the `CountedSet`.
+  ///
+  /// - Parameter value: A value that is `Hashable`.
+  public mutating func insert(_ value: Element) {
+    storage[value, default: 0] += 1
+  }
+  
+  /// Removes a value in the `CountedSet`.
+  ///
+  /// - Parameter value: A value in the `CountedSet`.
+  public mutating func remove(_ value: Element) {
+    guard let count = storage[value] else { return }
+    if count &gt; 1 {
+      storage[value] = count - 1
+    } else {
+      storage.removeValue(forKey: value)
+    }
+  }
+}
+
+extension CountedSet {
+  
+  /// Creates a new, empty counted set with at least the specified number of
+  /// elements' worth of buffer.
+  ///
+  /// Use this initializer to void repeated reallocations of a counted set's
+  /// buffer if you know you'll be adding elements to the set after creation.
+  /// The actual capacity of the created set will be the smallest power of 2
+  /// that is greater than or equal to `minimumCapacity`.
+  ///
+  /// - Parameter minimumCapacity: The minimum number of elements that the newly
+  /// created set should be able to store without reallocating its buffer.
+  public init(minimumCapacity: Int) {
+    storage = .init(minimumCapacity: minimumCapacity)
+  }
+}
+
+extension CountedSet: ExpressibleByArrayLiteral {
+  
+  /// `ExpressibleByArrayLiteral` conformance
+  ///
+  /// Creates a set containing the element of the given array literal.
+  ///
+  /// Do not call this initializer directly. It is used by the compiler when
+  /// you use an array literal. Instead, create a new counted set using an
+  /// array literal as its value by enclosing a comma-separated list of values
+  /// in square brackets.
+  ///
+  /// You can use an array literal anywhere a set is expected by the
+  /// type context.
+  ///
+  /// Here, a counted set of strings is created from an array literal holding
+  /// only strings.
+  ///
+  ///     let ingredients: CountedSet = ["sugar", "sugar", "salt"]
+  ///     print(ingredients.count(for: "sugar"))
+  ///     // prints `2`
+  ///
+  /// - Parameter elements: A variadic list of elements of the new set.
+  public init(arrayLiteral elements: Element...) {
+    self.init(minimumCapacity: elements.count)
+    for element in elements {
+      insert(element)
+    }
+  }
+}
+
+extension CountedSet: Sequence {
+  
+  /// Returns an iterator over the members of the counted set.
+  /// Uses `DictionaryIterator&lt;Element, UInt&gt;` for convenience.
+  public func makeIterator() -&gt; DictionaryIterator&lt;Element, UInt&gt; {
+    return storage.makeIterator()
+  }
+}
+
+extension CountedSet {
+  
+  /// Returns a new counted set containing the elements of the set that satisfy
+  /// the given predicate.
+  ///
+  /// In this example, `filter(_:)` is used to include only names shorter than
+  /// five characters.
+  ///
+  ///     let cast: CountedSet = ["Bob", "Bob", "Vince"]
+  ///     let filtered = cast.filter { $0.1 &gt; 1 }
+  ///
+  ///     print(filtered)
+  ///     // prints ["Bob": 2]
+  ///
+  /// - Parameter isIncluded: A closure that takes an element as its argument
+  ///   and returns a Boolean value indicating whether the element should be
+  ///   included in the returned counted set.
+  /// - Returns: A counted set of the elements that `isIncluded` allows.
+  public func filter(_ isIncluded: ((key: Element, value: UInt)) throws -&gt; Bool)
+    rethrows -&gt; CountedSet {
+    var result = CountedSet()
+    for element in self {
+      if try isIncluded((element.0, element.1)) {
+        for _ in 0..&lt;element.1 {
+          result.insert(element.0)
+        }
+      }
+    }
+    return result
+  }
+}
+
+extension CountedSet: Collection {
+  public typealias Index = Dictionary&lt;Element, UInt&gt;.Index
+
+  public var startIndex: Index {
+    return storage.startIndex
+  }
+
+  public var endIndex: Index {
+    return storage.endIndex
+  }
+
+  public subscript(position: Index) -&gt; (key: Element, value: UInt) {
+    return storage[position]
+  }
+  
+  public func index(after i: Index) -&gt; Index {
+    return storage.index(after: i)
+  }
+  
+  public func index(of member: Element) -&gt; Index? {
+    return storage.index(forKey: member)
+  }
+  
+  /// The number of elements in the set.
+  ///
+  /// - Complexity: O(1)
+  public var count: Int {
+    return storage.count
+  }
+  
+  /// A Boolean value that indicates whether the set is empty.
+  public var isEmpty: Bool {
+    return count == 0
+  }
+  
+  /// The first element of the counted set.
+  ///
+  /// The first element of the counted set is not necessarily the first element
+  /// added to the set. Don't expect any particular ordering of set elements.
+  ///
+  /// If the set is empty, the value of this property is `nil`.
+  public var first: (key: Element, value: UInt)? {
+    return count &gt; 0 ? self[startIndex] : nil
+  }
+}
+
+extension CountedSet: CustomStringConvertible {
+  
+  public var description: String {
+    return String(describing: storage)
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>C93A164F-4BAF-4388-B4FA-0F48FFB8C3B7</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>A data structure that keeps track of the number of insertions as well as the set.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>CountedSet</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

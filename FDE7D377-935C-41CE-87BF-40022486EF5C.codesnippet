@@ -6,7 +6,7 @@
 	<string>klresult</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>All</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>enum Result&lt;T, Error&gt; {
@@ -16,7 +16,7 @@
 	<key>IDECodeSnippetIdentifier</key>
 	<string>FDE7D377-935C-41CE-87BF-40022486EF5C</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string>Results enum for completion handlers</string>
 	<key>IDECodeSnippetTitle</key>
