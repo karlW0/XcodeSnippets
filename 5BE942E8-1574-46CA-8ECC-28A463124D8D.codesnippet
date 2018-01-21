@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klcodable</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>  // MARK: - Encodable &amp; Decodable
+  enum TopKeys: String, CodingKey {
+    case &lt;#key#&gt;
+  }
+  
+  enum NestedKeys: String, CodingKey {
+    case &lt;#key#&gt;
+  }
+  
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: TopKeys.self)
+    var nestedContainer = container.nestedContainer(keyedBy: NestedKeys.self, forKey: &lt;#top key#&gt;)
+    try nestedContainer.encode(&lt;#property#&gt;, forKey: &lt;#nested key#&gt;)
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: TopKeys.self)
+    
+    let nestedContainer = try container.nestedContainer(keyedBy: NestedKeys.self, forKey: &lt;#top key#&gt;)
+    &lt;#property#&gt; = try nestedContainer.decode(&lt;#type#&gt;.self, forKey: &lt;#nested key#&gt;)
+  }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>5BE942E8-1574-46CA-8ECC-28A463124D8D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Custom Encodable &amp; Decodable Implementation</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Codable</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
