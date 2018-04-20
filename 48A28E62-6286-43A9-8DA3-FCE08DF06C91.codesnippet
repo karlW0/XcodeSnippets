@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klmulticastclosuredelegate</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>import Foundation
+
+/// `MulticastClosureDelegate` is a class meant to hold a collection of weakly referenced closures.
+///
+/// This class is used to manage the passing of data from one type to another. Before listing the
+/// advantages of `MulticastClosureDelegate`, consider the following ways to pass data:
+///
+/// Delegation - 1 to 1 relationship between the delegate and the delegator.
+/// Closure callbacks - 1 to 1 relationship between the provider of the callback and the holder of the callback.
+/// NotificationCenter - 1 to many relationship between the poster and many observers.
+/// Key-value observing - 1 to 1 relationship between observer and property
+///
+/// The `MulticastClosureDelegate` should be seen as a hybrid of `NotificationCenter` and closure callbacks.
+/// `MulticastClosureDelegate` is a data structure that holds a collection of weakly held closures. Here's an
+/// example for its usage:
+///
+/// Let's assume there's a network call that may be requested many times from different objects:
+///
+///     func fetch(_ object: AnyObject, success: ([Foo]) -&gt; Void, failure: (Error) -&gt; Void)
+///
+/// Instead of firing off multiple `fetch` calls, you could use `MulticastClosureDelegate` to keep track of
+/// all the callers, and pass the result of the first call to all the callers:
+///
+///     typealias Success = ([Foo]) -&gt; Void
+///     typealias Failure = (Error) -&gt; Void
+///
+///     var multicastDelegate = MulticastClosureDelegate&lt;Success, Failure&gt;()
+///
+///     func fetch(_ object: AnyObject, success: @escaping ([Foo]) -&gt; Void, failure: @escaping (Error) -&gt; Void) {
+///       multicastDelegate.addClosurePair(for: object, success: success, failure: failure)
+///       guard multicastDelegate.count == 1 else { return }
+///       URLSession.shared.dataTask(with: URL(string: "&lt;some url string&gt;")!) { data, response, error in
+///         if let error = error { // inform all fetchers of error.
+///           multicastDelegate.getFailureTuples().forEach { args in
+///             let (closure, queue) = args
+///             queue.async {
+///               closure(error)
+///             }
+///           }
+///           return
+///         }
+///         guard let data = data else { return }
+///         let fooArray: [Foo] = // deserializing logic
+///         multicastDelegate.getSuccessTuples().forEach { args in // pass back fooArray to all fetchers
+///           let (closure, queue) = args
+///           queue.async {
+///             closure(fooArray)
+///           }
+///         }
+///       }
+///     }
+///
+/// `MulticastClosureDelegate` is a more constrained option compared to `NotificationCenter`, which is good
+/// because it prevents global broadcasts.
+public class MulticastClosureDelegate&lt;Success, Failure&gt; {
+  
+  // MARK: - Callback
+  class Callback {
+    let queue: DispatchQueue
+    let success: Success
+    let failure: Failure
+    init(queue: DispatchQueue, success: Success, failure: Failure) {
+      self.queue = queue
+      self.success = success
+      self.failure = failure
+    }
+  }
+  
+  // MARK: - Instance Properties
+  fileprivate var mapTable = SynchronizedValue(NSMapTable&lt;AnyObject, NSMutableArray&gt;.weakToStrongObjects())
+  
+  var count: Int {
+    return getCallbacks(removeAfter: false).count
+  }
+  
+  // MARK: - Instance Methods
+  func addClosurePair(for objectKey: AnyObject,
+                      queue: DispatchQueue = .main,
+                      success: Success,
+                      failure: Failure) {
+    
+    mapTable.set { mapTable in
+      let callback = Callback(queue: queue, success: success, failure: failure)
+      let array = mapTable.object(forKey: objectKey) ?? NSMutableArray()
+      array.add(callback)
+      mapTable.setObject(array, forKey: objectKey)
+    }
+  }
+  
+  func getSuccessTuples(removeAfter: Bool = true) -&gt; [(Success, DispatchQueue)] {
+    return getCallbacks(removeAfter: removeAfter).map {
+      return ($0.success, $0.queue)
+    }
+  }
+  
+  func getFailureTuples(removeAfter: Bool = true) -&gt; [(Failure, DispatchQueue)] {
+    return getCallbacks(removeAfter: removeAfter).map {
+      return ($0.failure, $0.queue)
+    }
+  }
+  
+  fileprivate func getCallbacks(removeAfter: Bool = true) -&gt; [Callback] {
+    var callbacks: [Callback]!
+    mapTable.set { mapTable in
+      let objects = mapTable.keyEnumerator().allObjects as [AnyObject]
+      callbacks = objects.reduce([]) { combinedArray, objectKey in
+        let array = mapTable.object(forKey: objectKey)! as! [Callback]
+        return combinedArray + array
+      }
+      guard removeAfter else { return }
+      objects.forEach { mapTable.removeObject(forKey: $0) }
+    }
+    return callbacks
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>48A28E62-6286-43A9-8DA3-FCE08DF06C91</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>A 1 to many delegate provider</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>MulticastClosureDelegate</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -3,31 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>kltablecell</string>
+	<string>klaction</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>import UIKit
-
-final class &lt;#cell name#&gt;: UITableViewCell {
-  static let reuseIdentifier = String(describing: &lt;#cell name#&gt;.self)
+	<string>// MARK: - @IBActions
+private extension &lt;#vc name#&gt; {
   
-  @IBOutlet private var &lt;#name#&gt;: &lt;#uielement#&gt;!
-  
-  func configure(&lt;#args#&gt;) {
-    &lt;#code#&gt;
+  @IBAction func &lt;#something#&gt;Tapped() {
+    
   }
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>1FBE4E3D-CC4B-48C0-A244-9B4DE23B6D3F</string>
+	<string>A5731036-D2A1-404E-A6ED-353D13786CD1</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>UITableViewCell Template</string>
+	<string>IBAction template</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITableViewCell</string>
+	<string>@IBAction</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

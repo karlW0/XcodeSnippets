@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klpost</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    var urlRequest = URLRequest(url: &lt;#url#&gt;)
+    urlRequest.httpMethod = "&lt;#POST#&gt;"
+    
+    let params: [String: Any] = [
+      &lt;#key#&gt;:&lt;#value#&gt;,
+    ]
+    urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+    
+    URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+      guard let data = data else { fatalError() }
+      guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else { fatalError() }
+      print(json)
+    }.resume()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>6C5E8023-44E9-4851-92E5-3FAE537FDB31</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Post Request</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

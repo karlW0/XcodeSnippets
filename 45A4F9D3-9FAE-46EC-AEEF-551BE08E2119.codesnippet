@@ -3,31 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>kltablecell</string>
+	<string>klurlcomps</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>import UIKit
+	<string>var comps = URLComponents()
+comps.scheme = "https"
+comps.host = &lt;#api.spotify.com#&gt;
+comps.path = &lt;#/v1/me/playlists#&gt;
 
-final class &lt;#cell name#&gt;: UITableViewCell {
-  static let reuseIdentifier = String(describing: &lt;#cell name#&gt;.self)
-  
-  @IBOutlet private var &lt;#name#&gt;: &lt;#uielement#&gt;!
-  
-  func configure(&lt;#args#&gt;) {
-    &lt;#code#&gt;
-  }
-}</string>
+comps.queryItems = [
+  URLQueryItem(name: &lt;#T##String#&gt;, value: &lt;#T##String?#&gt;),
+]</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>1FBE4E3D-CC4B-48C0-A244-9B4DE23B6D3F</string>
+	<string>45A4F9D3-9FAE-46EC-AEEF-551BE08E2119</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
-	<string>UITableViewCell Template</string>
+	<string>URLComponents</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UITableViewCell</string>
+	<string>URLComponents</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
