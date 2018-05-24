@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klconfigurecell</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/// `ReusableCell` is an interface that `UICollectionViewCell` and `UITableViewCell`
+/// classes would want to adopt to.
+///
+/// Adopting this interface grants access to the `reuseIdentifier` type property
+/// which returns the name of the cell class.
+///
+/// This makes reuseIdentifiers convenient. Here's an example use case:
+///
+///     // Cell subclass
+///     final class HourlyCell: UITableViewCell {
+///       // ...
+///     }
+///
+///     // MARK: - ReusableCell
+///     extension HourlyCell: ReusableCell {}
+///
+///     // In your table/collection data source
+///     let cell = tableView.dequeueReusableCell(withIdentifier:
+///       HourlyCell.reuseIdentifier) as! HourlyCell
+protocol ReusableCell {
+    static var reuseIdentifier: String { get }
+}
+
+extension ReusableCell {
+    
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
+}
+
+/// `ConfigurableCell` is an interface that `UICollectionViewCell`
+/// and `UITableViewCell` classes would want to adopt to.
+///
+/// This interface inherits from `ReusableCell`, and extends the functionality by
+/// enforcing the `configure(with:)` function.
+///
+/// This allows cell to type-erase their implementation details. This is advantageous
+/// because users no longer need to access the concrete implementation to configure
+/// the cell.
+///
+/// Example usage:
+///
+///     // Cell subclass
+///     final class HourlyCell: UITableViewCell {
+///       @IBOutlet private var timeLabel: UILabel!
+///     }
+///
+///     extension HourlyCell: ConfigurableCell {
+///
+///       func configure(with element: Element) {
+///         timeLabel.text = "4:00pm"
+///       }
+///     }
+protocol ConfigurableCell: ReusableCell {
+    associatedtype Element
+    
+    func configure(with element: Element)
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>83E42851-0E93-4093-8663-18EFAF5A95DC</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Configure &amp; Resuable Cell</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
