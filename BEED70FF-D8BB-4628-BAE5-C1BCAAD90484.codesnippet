@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>kltabcontroller</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>import UIKit
+
+final class &lt;#tab controller name#&gt;: UITabBarController {
+  
+  /// Factory method for creating this view controller.
+  ///
+  /// - Returns: Returns an instance of this view controller.
+  class func instantiate() -&gt; &lt;#tab controller name#&gt; {
+    let storyboard = UIStoryboard(name: String(describing: &lt;#tab controller name#&gt;.self), bundle: nil)
+    let vc = storyboard.instantiateInitialViewController() as! &lt;#tab controller name#&gt;
+    return vc
+  }
+}
+
+// MARK: - Life Cycle
+extension &lt;#tab controller name#&gt; {
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    let firstVC = &lt;#vc#&gt;
+    firstVC.tabBarItem = UITabBarItem(title: &lt;#title#&gt;, image: &lt;#image#&gt;, selectedImage: nil)
+    
+    let secondVC = &lt;#vc#&gt;
+    secondVC.tabBarItem = UITabBarItem(title: &lt;#title#&gt;, image: &lt;#image#&gt;, selectedImage: nil)
+    
+    let thirdVC = &lt;#vc#&gt;
+    thirdVC.tabBarItem = UITabBarItem(title: &lt;#title#&gt;, image: &lt;#image#&gt;, selectedImage: nil)
+    
+    viewControllers = [firstVC, secondVC, thirdVC]
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BEED70FF-D8BB-4628-BAE5-C1BCAAD90484</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>A tab bar controller</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>UITabBarController</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
