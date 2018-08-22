@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klfadeanimationcontroller</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>import UIKit
+
+final class FadeAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+  
+  enum Mode {
+    case dismissing, presenting
+  }
+  
+  let mode: Mode
+  let backgroundTransparency: CGFloat
+  
+  init(mode: Mode, backgroundTransparency: CGFloat) {
+    self.mode = mode
+    self.backgroundTransparency = backgroundTransparency
+    super.init()
+  }
+  
+  func transitionDuration(using transitionContext:
+    UIViewControllerContextTransitioning?) -&gt; TimeInterval {
+    return 0.3
+  }
+  
+  func animateTransition(using transitionContext:
+    UIViewControllerContextTransitioning) {
+    
+    if mode == .presenting, let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to), let toView = transitionContext.view(forKey: UITransitionContextViewKey.to) {
+      toViewController.view.backgroundColor = toViewController.view.backgroundColor?.withAlphaComponent(0)
+      
+      let containerView = transitionContext.containerView
+      toView.frame = transitionContext.finalFrame(for: toViewController)
+      containerView.addSubview(toView)
+      
+      transitionContext.completeTransition(true)
+      UIView.animate(withDuration: 0.3, animations: {
+        toViewController.view.backgroundColor = toViewController.view.backgroundColor?.withAlphaComponent(self.backgroundTransparency)
+      })
+    } else {
+      if let fromView = transitionContext.view(forKey: .from) {
+        let time = transitionDuration(using: transitionContext)
+        UIView.animate(withDuration: time, animations: {
+          fromView.alpha = 0
+        }, completion: { finished in
+          transitionContext.completeTransition(finished)
+        })
+      }
+    }
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>536BF44D-8575-4364-A6F7-2902F8102219</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Fade Animation Controller</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
