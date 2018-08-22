@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>kltextfielddelegate</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>extension &lt;#vc name#&gt;: UITextFieldDelegate {
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -&gt; Bool {
+    
+    // Disable button if empty text field.
+    let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    if text.isEmpty {
+      UIView.animate(withDuration: 0.25) {
+        self.&lt;#button name#&gt;.alpha = 0.5
+      }
+      &lt;#button name#&gt;.isUserInteractionEnabled = false
+    } else {
+      UIView.animate(withDuration: 0.25) {
+        self.&lt;#button name#&gt;.alpha = 1
+      }
+      &lt;#button name#&gt;.isUserInteractionEnabled = true
+    }
+    return true
+  }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7EC8E1CC-63B0-4B03-9529-FC1FBBA18BEE</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>Handle cases where text field is empty</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Text field delegate</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
