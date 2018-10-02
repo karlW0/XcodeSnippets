@@ -3,25 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>kldimmingpresentationcontroller</string>
+	<string>klextension</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>import UIKit
-
-final class DimmingPresentationController: UIPresentationController {
-  override var shouldRemovePresentersView: Bool {
-    return false
-  }
+	<string>// MARK: - &lt;#extension name#&gt;
+extension &lt;#vc name#&gt;: &lt;#extension name#&gt; {
+  
+  
 }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>4318A4F0-4963-4308-B730-051EB5DB4A9C</string>
+	<string>DC81EC82-169E-490E-8B0F-149F14DC8DFE</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>A tiny shortcut for extensions</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Dimming Presentation Controller</string>
+	<string>Extension shortcut</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

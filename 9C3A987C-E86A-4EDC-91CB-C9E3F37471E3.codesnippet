@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>klloading</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>  /// A variable that handles feedback for
+  private var isLoading = false {
+    didSet {
+      isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+      &lt;#[button1, button2, button3]#&gt;.forEach { $0.isUserInteractionEnabled = !isLoading; $0.alpha = isLoading ? 0.5 : 1 } // disable actions during loading
+    }
+  }
+  
+  private lazy var activityIndicator: UIActivityIndicatorView = {
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    activityIndicator.center = view.center
+    activityIndicator.hidesWhenStopped = true
+    view.addSubview(activityIndicator)
+    return activityIndicator
+  }()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9C3A987C-E86A-4EDC-91CB-C9E3F37471E3</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>An UIActivityIndicator and isLoading variable</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Loading indicator</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
